@@ -1,5 +1,7 @@
+# .github/workflows/ci-cd.yml
+
 # Name of your workflow
-name: Node.js CI/CD Pipeline
+name: Node.js CI Check
 
 # Controls when the workflow will run
 on:
@@ -9,80 +11,39 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# A workflow run is made up of one or more jobs
 jobs:
-  # This job builds and tests the application (Continuous Integration - CI)
-  build:
+  # This job just checks out the code and confirms Node.js setup
+  validate:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest # Use the latest Ubuntu virtual machine provided by GitHub [5]
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.x] # Define Node.js versions to test against [3]
+        node-version: [18.x] # Use a specific Node.js version
 
     steps:
-      # Step 1: Check out your repository code so the workflow can access it [3]
+      # Step 1: Check out your repository code
       - name: Checkout repository
-        uses: actions/checkout@v4 # Use a pre-built action to check out code
+        uses: actions/checkout@v4
 
-      # Step 2: Set up the specified Node.js version [3]
+      # Step 2: Set up the specified Node.js version
+      # (Useful if you add steps later that need Node)
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm' # Cache npm dependencies for faster builds
 
-      # Step 3: Install project dependencies [3]
-      - name: Install Dependencies
-        run: npm ci # Use 'ci' for cleaner installs in CI environments
+      # Step 3: Confirm setup (optional)
+      - name: Display Node.js version
+        run: node -v
 
-      # Step 4: Build the application (adjust if your build command is different)
-      # Assumes your build output goes to a 'dist' or 'build' directory
-      - name: Build Application
-        run: npm run build --if-present # Run build script if it exists
+      # REMOVED: npm ci - because no package-lock.json exists or is needed
+      # REMOVED: npm run build - because there is no build step for this simple server
+      # REMOVED: npm test - because there are no tests defined
+      # REMOVED: Upload artifact - because there is no build output
 
-      # Step 5: Run tests (adjust if your test command is different) [3]
-      - name: Run Tests
-        run: npm test --if-present # Run tests if a test script exists
-
-      # Step 6: Upload build artifact for the deployment job
-      # This saves the built files (e.g., from 'dist' folder) for the next job [2]
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: production-files # Name of the artifact
-          path: ./dist # Path to the directory to upload (adjust if needed, e.g., ./build)
-
-  # This job deploys the application (Continuous Deployment - CD)
-  deploy:
-    # This job depends on the 'build' job completing successfully [2]
-    needs: build
-    # Only run this job if the trigger was a push to the 'main' branch
-    if: github.ref == 'refs/heads/main'
-
-    # The type of runner for deployment
-    runs-on: ubuntu-latest
-
-    # Grant permissions for the GITHUB_TOKEN to deploy to GitHub Pages
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }} # Output the deployed URL
-
-    steps:
-      # Step 1: Download the build artifact uploaded in the 'build' job [2]
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: production-files # Must match the artifact name from the build job
-          path: ./dist # Download artifact to this directory (must match publish_dir later)
-
-      # Step 2: Deploy to GitHub Pages using a dedicated action [2]
-      - name: Deploy to GitHub Pages
-        id: deployment # Give the step an ID to reference its outputs
-        uses: actions/deploy-pages@v4 # Use the official GitHub Pages deployment action
+# REMOVED: The entire 'deploy' job, as GitHub Pages cannot run this Node.js server.
+#          You would need a different hosting platform (like Heroku, AWS, Azure App Service, etc.)
+#          and a different deployment strategy for a Node.js server.
 

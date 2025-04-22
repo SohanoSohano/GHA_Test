@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload files from the root directory (where index.html is)
-          path: '.'
+          path: './src'
 
       # Step 4: Deploy to GitHub Pages
       # This action takes the uploaded artifact and deploys it

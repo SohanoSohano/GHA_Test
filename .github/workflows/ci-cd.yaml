@@ -28,7 +28,6 @@ jobs:
         uses: actions/checkout@v4
 
       # Step 2: Set up the specified Node.js version
-      # (Useful if you add steps later that need Node)
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -38,12 +37,5 @@ jobs:
       - name: Display Node.js version
         run: node -v
 
-      # REMOVED: npm ci - because no package-lock.json exists or is needed
-      # REMOVED: npm run build - because there is no build step for this simple server
-      # REMOVED: npm test - because there are no tests defined
-      # REMOVED: Upload artifact - because there is no build output
-
-# REMOVED: The entire 'deploy' job, as GitHub Pages cannot run this Node.js server.
-#          You would need a different hosting platform (like Heroku, AWS, Azure App Service, etc.)
-#          and a different deployment strategy for a Node.js server.
+ 
 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Deployed via GitHub Actions!</title> <!-- Added an emoji -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Basic Reset & Variables */
+        :root {
+            --bg-color: #1a1a2e; /* Dark blue/purple background */
+            --card-bg: #2a2a4e; /* Slightly lighter card background */
+            --text-color: #e0e0e0; /* Light grey text */
+            --heading-color: #ffffff; /* White headings */
+            --accent-color: #4fc3f7; /* Light blue accent */
+            --code-bg: #3a3a5e; /* Background for code elements */
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* Main Content Card */
+        .card {
+            background-color: var(--card-bg);
+            padding: 2em 3em;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay */
+            overflow: hidden; /* Contain elements */
+            position: relative; /* For potential pseudo-elements later */
+        }
+
+        /* Header Styling */
+        header {
+            margin-bottom: 1.5em;
+        }
+
+        header i {
+            font-size: 3em;
+            color: var(--accent-color);
+            margin-bottom: 0.3em;
+            display: block; /* Center icon */
+            animation: pulse 2s infinite ease-in-out; /* Subtle pulse animation */
+        }
+
+        h1 {
+            color: var(--heading-color);
+            font-weight: 600;
+            font-size: 1.8em;
+        }
+
+        /* Main Content Styling */
+        main p {
+            margin-bottom: 1em;
+            font-size: 1.05em; /* Slightly larger paragraph text */
+        }
+
+        /* Code Tag Styling */
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-color);
+            padding: 0.2em 0.5em;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 2em;
+            padding-top: 1em;
+            border-top: 1px solid var(--code-bg); /* Subtle separator */
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.6); /* Lighter footer text */
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--heading-color);
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Adjustments (Optional) */
+        @media (max-width: 600px) {
+            .card {
+                padding: 1.5em 2em;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            header i {
+                font-size: 2.5em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <header>
+            <!-- Rocket icon for deployment -->
+            <i class="fas fa-rocket"></i>
+            <h1>Deployed via GitHub Actions!</h1>
+        </header>
+        <main>
+            <p>This static website is automatically built and deployed using a CI/CD pipeline managed by GitHub Actions.</p>
+            <p>Every push to the <code>main</code> branch triggers a fresh deployment to GitHub Pages.</p>
+        </main>
+        <footer>
+            <!-- IMPORTANT: Replace YOUR_USERNAME and YOUR_REPONAME with your actual GitHub details -->
+            <p>Check out the <a href="https://github.com/SohanoSohano/GHA_Test" target="_blank" rel="noopener noreferrer">source code on GitHub</a>.</p>
+        </footer>
+    </div>
+</body>
+</html>
